@@ -8,4 +8,4 @@ Route::get("/", [UploadController::class, "showForm"])->name("home");
 
 Route::post("upload", [UploadController::class, "upload"])->name("upload");
 
-Route::get("process", [UploadController::class, "process"])->name("process");
+Route::get("process/{filename}", [UploadController::class, "process"])->name("process");

@@ -11,21 +11,20 @@ class UploadController extends Controller
     }
 
     public function upload(Request $request) {
+        // Ensure the uploaded file is a valid image
         $request->validate([
             "image" => "required|image|mimes:jpg,png,jpeg|max:2048",
         ]);
-        // dd($request->file("image"));
+
+        // Store the image locally
         if ($request->file("image")->isValid()) {
             $imagePath = $request->file("image")->store("images");
-            return response()->json([
-                'message' => 'File uploaded successfully!',
-                'path' => $imagePath,
-            ]);
+            return redirect()->route("process", [basename($imagePath)]);
         }
         return response()->json(['error' => 'No file was uploaded.'], 400);
     }
 
-    public function process() {
-        return "Processing Image Page";
+    public function process($filename) {
+        return $filename;
     }
 }
