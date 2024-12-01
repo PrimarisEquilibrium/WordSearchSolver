@@ -10,14 +10,15 @@
 </head>
 <body>
     <h1>Word Search</h1>
-    @foreach ($rows as &$row)
-        <span class="row">{{ $row }}</span>
-        <br>
-    @endforeach
+    <div class="row-container">
+        @foreach ($rows as &$row)
+            <span class="row">{{ $row }}</span>
+        @endforeach
+    </div>
     <h2>Words: </h2>
     @foreach ($wordArray as &$word)
         <span class="word">{{ $word }}</span>
-        <br>
     @endforeach
+    <button onclick="window.location.href='{{ route('home') }}'">Return Home</button>
 </body>
 </html>
