@@ -18,13 +18,14 @@ class UploadController extends Controller
 
         // Store the image locally
         if ($request->file("image")->isValid()) {
-            $imagePath = $request->file("image")->store("images");
+            $imagePath = $request->file("image")->store("images", "public");
             return redirect()->route("process", [basename($imagePath)]);
         }
         return response()->json(['error' => 'No file was uploaded.'], 400);
     }
 
     public function process($filename) {
-        return Image;
+        $imagePath = storage_path("app\\public\\images\\" . $filename);
+        return response()->file($imagePath);
     }
 }
