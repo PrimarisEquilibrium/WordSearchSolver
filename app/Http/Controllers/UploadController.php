@@ -25,6 +25,6 @@ class UploadController extends Controller
     }
 
     public function process($filename) {
-        return $filename;
+        return Image;
     }
 }
