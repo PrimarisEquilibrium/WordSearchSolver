@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\OcrReaderService;
 use Illuminate\Http\Request;
 
 class UploadController extends Controller
@@ -26,6 +27,13 @@ class UploadController extends Controller
 
     public function process($filename) {
         $imagePath = storage_path("app\\public\\images\\" . $filename);
-        return response()->file($imagePath);
+
+        // Take the image and convert it into a string array
+        $raw_rows = OcrReaderService::toText($imagePath);
+        $rows = preg_split('/\s+/', $raw_rows);
+
+        foreach ($rows as &$row) {
+            echo strlen($row) . " " . $row . "<br>";
+        }
     }
 }
