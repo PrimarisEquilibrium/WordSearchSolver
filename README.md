@@ -4,6 +4,6 @@ This project is a full-stack application designed to efficiently solve word sear
 
 ## Tech Stack
 
-**Client:** Javascript, VueJS, HTML, CSS
+**Client:** Javascript, HTML, CSS, Blade
 
-**Server:** Laravel, PHP, AJAX
+**Server:** PHP, Laravel, Livewire, TesseractOCR
