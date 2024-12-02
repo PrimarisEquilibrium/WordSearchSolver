@@ -12,7 +12,11 @@
     <h1>Word Search</h1>
     <div class="row-container">
         @foreach ($rows as &$row)
-            <span class="row">{{ $row }}</span>
+            <span class="row">
+                @for ($i = 0; $i < strlen($row); $i++)
+                    <span class="letter">{{$row[$i]}}</span>
+                @endfor
+            </span>
         @endforeach
     </div>
     <h2>Words: </h2>

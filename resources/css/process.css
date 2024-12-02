@@ -3,7 +3,6 @@
 }
 
 .row {
-    letter-spacing: 12px;
     line-height: 24px;
     font-size: 18px;
     font-family: "Courier New", Courier, monospace;
@@ -13,6 +12,7 @@
 .word {
     display: block;
     margin-bottom: 0.25rem;
+    cursor: pointer;
 }
 
 button {
