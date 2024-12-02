@@ -32,15 +32,4 @@ class UploadController extends Controller
 
         return response()->json(['error' => 'No file was uploaded.'], 400);
     }
-
-    public function process(string $imagename, string $words) {
-        $imagePath = storage_path("app\\public\\images\\" . $imagename);
-        $wordArray = json_decode($words);
-
-        // Take the image and convert it into a string array
-        $raw_rows = OcrReaderService::toText($imagePath);
-        $rows = preg_split('/\s+/', $raw_rows);
-
-        return view("process", ["rows" => $rows, "wordArray" => $wordArray]);
-    }
 }
