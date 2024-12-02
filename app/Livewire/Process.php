@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\OcrReaderService;
+use App\Services\WordSearchSolverService;
 use Livewire\Component;
 
 class Process extends Component
@@ -11,6 +12,7 @@ class Process extends Component
     public $rows;
 
     public $active_word = "";
+    public $highlighted_tiles = [];
 
     public function mount(string $imagename, string $words) {
         // Decode the words array
@@ -24,10 +26,24 @@ class Process extends Component
         $raw_rows = OcrReaderService::toText($image_path);
         $rows = preg_split('/\s+/', $raw_rows);
         $this->rows = $rows;
+    }  
+
+    /**
+     * Updates the current active word.
+     * @param string $new_word The new word.
+     */
+    public function modifyActiveWord(string $new_word) : void {
+        $this->active_word = $new_word;
+
+        // Functions that need to be ran on the modification of active_word
+        $this->highlightMatchedWord($new_word);
+    }
+
+    public function highlightMatchedWord(string $word) {
+        $this->highlighted_tiles = WordSearchSolverService::findWord($word, $this->rows);
     }
  
-    public function render()
-    {
+    public function render() {
         return view('livewire.process');
     }
 }
