@@ -7,19 +7,21 @@ use Livewire\Component;
 
 class Process extends Component
 {
-    public $wordArray;
+    public $word_array;
     public $rows;
+
+    public $active_word = "";
 
     public function mount(string $imagename, string $words) {
         // Decode the words array
         $wordArray = json_decode($words);
-        $this->wordArray = $wordArray;
+        $this->word_array = $wordArray;
         
         // Get the full image path
-        $imagePath = storage_path("app\\public\\images\\" . $imagename);
+        $image_path = storage_path("app\\public\\images\\" . $imagename);
 
         // Take the image and convert it into a string array
-        $raw_rows = OcrReaderService::toText($imagePath);
+        $raw_rows = OcrReaderService::toText($image_path);
         $rows = preg_split('/\s+/', $raw_rows);
         $this->rows = $rows;
     }

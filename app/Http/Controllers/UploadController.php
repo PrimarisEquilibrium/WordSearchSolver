@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\OcrReaderService;
 use Illuminate\Http\Request;
 
 class UploadController extends Controller
@@ -18,15 +17,15 @@ class UploadController extends Controller
             "words" => "required|string"
         ]);
 
-        $wordList = $request->input("words");
-        $wordArray = array_map("trim", explode(",", $wordList));
+        $word_list = $request->input("words");
+        $word_array = array_map("trim", explode(",", $word_list));
 
         // Store the image locally
         if ($request->file("image")->isValid()) {
-            $imagePath = $request->file("image")->store("images", "public");
+            $image_path = $request->file("image")->store("images", "public");
             return redirect()->route("process", [
-                "imagename" => basename($imagePath),
-                "words" => urlencode(json_encode($wordArray))   
+                "imagename" => basename($image_path),
+                "words" => urlencode(json_encode($word_array))   
             ]);
         }
 

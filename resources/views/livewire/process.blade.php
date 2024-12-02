@@ -10,7 +10,7 @@
         @endforeach
     </div>
     <h2>Words: </h2>
-    @foreach ($wordArray as &$word)
+    @foreach ($word_array as &$word)
         <span class="word">{{ $word }}</span>
     @endforeach
     <button onclick="window.location.href='{{ route('home') }}'">Return Home</button>
