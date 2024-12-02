@@ -44,6 +44,11 @@ class WordSearchSolverService {
                     $cur_pos = $pos; // The state of the current position
 
                     while (true) {
+                        // The word was successfully found
+                        if ($match_char_count == strlen($word)) {
+                            return $matched_positions;
+                        }
+
                         // The new row and column after being shifted by the current direction
                         $new_row = $cur_pos[0] + $DIR[0];
                         $new_col = $cur_pos[1] + $DIR[1];
@@ -67,11 +72,6 @@ class WordSearchSolverService {
                             }
                         } else {
                             break;
-                        }
-
-                        // The word was successfully found
-                        if ($match_char_count == strlen($word)) {
-                            return $matched_positions;
                         }
                     }
                 }

@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
-    <title>Home</title>
-</head>
-<body>
+@extends("components.layouts.layout")
+
+@section("content")
+
+<div>
     <h1>Word Search Solver</h1>
     <form action="{{ route("upload") }}" method="POST" enctype="multipart/form-data">
         @csrf
@@ -18,5 +13,6 @@
         <textarea name="words" id="words" cols="30" rows="10"></textarea>
         <button type="submit" id="submit-btn">Submit</button>
     </form>
-</body>
-</html>
+</div>
+
+@endsection
