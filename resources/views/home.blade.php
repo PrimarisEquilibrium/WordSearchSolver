@@ -4,6 +4,12 @@
 
 <div>
     <h1>Word Search Solver</h1>
+    <ul>
+        <li>The word search image size must be less than 2MB.</li>
+        <li>Supported image formats: jpg, png, jpeg.</li>
+        <li>Note the image reader is not 100% accurate.</li>
+        <li>Ensure your image is atleast 300DPI and font is clear to read.</li>
+    </ul>
     <form action="{{ route("upload") }}" method="POST" enctype="multipart/form-data">
         @csrf
         @livewire("image-input")

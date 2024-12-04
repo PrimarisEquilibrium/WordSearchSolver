@@ -23,3 +23,11 @@ button {
     margin-top: 0.5rem;
     padding: 6px 18px;
 }
+
+ul {
+    margin-bottom: 1.5rem;
+}
+
+li {
+    margin-left: 2rem;
+}
