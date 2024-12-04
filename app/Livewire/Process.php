@@ -44,12 +44,19 @@ class Process extends Component
         $this->highlighted_tiles = WordSearchSolverService::findWord($this->active_word, $this->rows);
     }
 
-    public function updateBoard() {
+    /**
+     * Replaces $rows with $temp_rows.
+     */
+    public function updateBoard() : void {
+        // $temp_rows is in a string format, convert it into an array of string rows
         $this->rows = preg_split('/\s+/', $this->temp_rows);
         $this->toggleEditMode();
     }
 
-    public function toggleEditMode()
+    /**
+     * Toggles the $edit_mode boolean state.
+     */
+    public function toggleEditMode() : void
     {
         $this->edit_mode = !$this->edit_mode;
     }
