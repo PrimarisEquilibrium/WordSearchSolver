@@ -33,6 +33,7 @@
 
     @if ($image)
         <img class="preview-img" src="{{ $image->temporaryUrl() }}" alt="image preview">
+        <button type="button" wire:click="resetImage()">Reset Image</button>
     @else
         <div class="preview-placeholder">
             <label class="preview-placeholder-label" for="image">

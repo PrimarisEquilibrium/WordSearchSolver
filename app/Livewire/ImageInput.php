@@ -15,6 +15,10 @@ class ImageInput extends Component
         "image" => "required|image|max:2048"
     ];
 
+    public function resetImage() {
+        $this->reset("image");
+    }
+
     public function render()
     {
         return view('livewire.image-input');
