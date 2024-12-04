@@ -7,8 +7,9 @@
         }
 
         .preview-placeholder {
+            display: flex;
             width: 250px; 
-            height: 250px; 
+            height: 250px;
             background-color:rgb(229, 229, 229);
             border: 1px solid black;
             text-align: center;
@@ -19,6 +20,7 @@
         }
 
         .preview-placeholder-label {
+            flex: 1;
             cursor: pointer;
             color: gray;
             font-size: 1.25rem;
