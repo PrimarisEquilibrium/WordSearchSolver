@@ -14,6 +14,9 @@ class Process extends Component
     public $active_word = "";
     public $highlighted_tiles = [];
 
+    public $edit_mode = false;
+    public $temp_rows;
+
     public function mount(string $imagename, string $words) {
         // Decode the words array
         $wordArray = json_decode($words);
@@ -26,6 +29,8 @@ class Process extends Component
         $raw_rows = OcrReaderService::toText($image_path);
         $rows = preg_split('/\s+/', $raw_rows);
         $this->rows = $rows;
+
+        $this->temp_rows = implode(", \n", $this->rows);
     }  
 
     /**
@@ -37,6 +42,16 @@ class Process extends Component
 
         // Update the highlighted tiles based on the updated word
         $this->highlighted_tiles = WordSearchSolverService::findWord($this->active_word, $this->rows);
+    }
+
+    public function updateBoard() {
+        $this->rows = preg_split('/\s+/', $this->temp_rows);
+        $this->toggleEditMode();
+    }
+
+    public function toggleEditMode()
+    {
+        $this->edit_mode = !$this->edit_mode;
     }
  
     public function render() {

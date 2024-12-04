@@ -33,15 +33,32 @@
     </style>
     
     <h1>Word Search</h1>
-    <div class="row-container">
-        @foreach ($rows as $r=>&$row)
-            <span class="row">
-                @for ($c = 0; $c < strlen($row); $c++)
-                    <span class="letter {{ in_array([$r, $c], $highlighted_tiles) ? 'highlight' : '' }}">{{$row[$c]}}</span>
-                @endfor
-            </span>
-        @endforeach
-    </div>
+    @if (!$edit_mode)
+        <div class="row-container">
+            @foreach ($rows as $r=>&$row)
+                <span class="row">
+                    @for ($c = 0; $c < strlen($row); $c++)
+                        <span class="letter {{ in_array([$r, $c], $highlighted_tiles) ? 'highlight' : '' }}">{{$row[$c]}}</span>
+                    @endfor
+                </span>
+            @endforeach
+        </div>
+    @else
+        <textarea 
+            name="new-board" 
+            id="new-board" 
+            cols="{{ strlen($rows[0]) * 1.5 }}" 
+            rows="{{ count($rows) }}"
+            wire:model="temp_rows"
+        >{{ implode(", \n", $rows) }}
+        </textarea>
+        <button wire:click="updateBoard">Confirm New Board</button>
+    @endif
+    
+    <br>
+    <button wire:click="toggleEditMode">Modify Board</button>
+    <br>
+
     <h2>Words (Click to reveal): </h2>
     <div class="word-container">
         @foreach ($word_array as &$word)
