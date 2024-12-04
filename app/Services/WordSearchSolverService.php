@@ -56,8 +56,8 @@ class WordSearchSolverService {
 
                         // In bounds
                         if (
-                            $new_row >= 0 && $new_row <= $rows && 
-                            $new_col >= 0 && $new_col <= $cols
+                            $new_row >= 0 && $new_row <= $rows - 1 && 
+                            $new_col >= 0 && $new_col <= $cols - 1
                         ) {
                             // Ensure grid letter is lowercase to prevent the equality check from failing
                             $currentGridLetter = strtolower($word_search[$new_row][$new_col]);
