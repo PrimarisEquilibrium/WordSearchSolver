@@ -5,7 +5,12 @@ namespace App\Services;
 use thiagoalessio\TesseractOCR\TesseractOCR;
 
 class OcrReaderService {
-    public static function toText(string $imagePath) {
+    /**
+     * Reads an image and converts it into a string.
+     * @param string $imagePath The path to the image.
+     * @return string The converted string.
+     */
+    public static function toText(string $imagePath) : string {
         return (new TesseractOCR($imagePath))
             ->lang("eng")
             ->psm(6)

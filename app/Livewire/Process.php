@@ -35,12 +35,8 @@ class Process extends Component
     public function modifyActiveWord(string $new_word) : void {
         $this->active_word = $new_word;
 
-        // Functions that need to be ran on the modification of active_word
-        $this->highlightMatchedWord($new_word);
-    }
-
-    public function highlightMatchedWord(string $word) {
-        $this->highlighted_tiles = WordSearchSolverService::findWord($word, $this->rows);
+        // Update the highlighted tiles based on the updated word
+        $this->highlighted_tiles = WordSearchSolverService::findWord($this->active_word, $this->rows);
     }
  
     public function render() {

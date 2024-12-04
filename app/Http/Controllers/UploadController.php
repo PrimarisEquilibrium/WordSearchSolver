@@ -23,6 +23,7 @@ class UploadController extends Controller
         // Store the image locally
         if ($request->file("image")->isValid()) {
             $image_path = $request->file("image")->store("images", "public");
+            // Send the image name and words array to the process route
             return redirect()->route("process", [
                 "imagename" => basename($image_path),
                 "words" => urlencode(json_encode($word_array))   

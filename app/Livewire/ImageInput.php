@@ -12,10 +12,13 @@ class ImageInput extends Component
     public $image;
 
     protected $rules = [
-        "image" => "required|image|max:2048"
+        "image" => "required|image|mimes:jpg,png,jpeg|max:2048"
     ];
 
-    public function resetImage() {
+    /**
+     * Resets the image state data
+     */
+    public function resetImage() : void {
         $this->reset("image");
     }
 
