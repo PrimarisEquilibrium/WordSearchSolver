@@ -27,7 +27,9 @@
         }
 
         input[type="file"] {
-            display: none;
+            visibility: hidden;
+            position: absolute;
+            top: -500px;
         }
     </style>
 
@@ -40,6 +42,6 @@
                 Click to upload image
             </label>
         </div>
-        <input type="file" wire:model="image" name="image" id="image" required>
-    @endif
+        @endif
+    <input type="file" wire:model="image" name="image" id="image" required>
 </div>
