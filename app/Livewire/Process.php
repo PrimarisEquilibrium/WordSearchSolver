@@ -10,12 +10,13 @@ class Process extends Component
 {
     public $word_array;
     public $rows;
+    public $input_word; // The currently typed word in the "word to add" input box
 
-    public $active_word = "";
-    public $highlighted_tiles = [];
+    public $active_word = ""; // The search word
+    public $highlighted_tiles = []; // Coordinate pair of the searched word characters in the grid
 
     public $edit_mode = false;
-    public $temp_rows;
+    public $input_rows; // The new user modified word search array
 
     public function mount(string $imagename, string $words) {
         // Decode the words array
@@ -30,7 +31,7 @@ class Process extends Component
         $rows = preg_split('/\s+/', $raw_rows);
         $this->rows = $rows;
 
-        $this->temp_rows = implode(", \n", $this->rows);
+        $this->input_rows = implode(", \n", $this->rows);
     }  
 
     /**
@@ -45,11 +46,11 @@ class Process extends Component
     }
 
     /**
-     * Replaces $rows with $temp_rows.
+     * Replaces $rows with $input_rows.
      */
     public function updateBoard() : void {
-        // $temp_rows is in a string format, convert it into an array of string rows
-        $this->rows = preg_split('/\s+/', $this->temp_rows);
+        // $input_rows is in a string format, convert it into an array of string rows
+        $this->rows = preg_split('/\s+/', $this->input_rows);
         $this->toggleEditMode();
     }
 
@@ -59,6 +60,13 @@ class Process extends Component
     public function toggleEditMode() : void
     {
         $this->edit_mode = !$this->edit_mode;
+    }
+
+    /**
+     * Adds the typed word to the words to find array.
+     */
+    public function addWord() : void {
+        array_push($this->word_array, $this->input_word);
     }
  
     public function render() {
