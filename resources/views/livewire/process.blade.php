@@ -37,15 +37,20 @@
             type="text"
             placeholder="Word to add..."
             wire:model="input_word"
-            class="input input-bordered input-primary w-full max-w-xs join-item" />
-        <button class="btn btn-outline btn-primary join-item" wire:click="addWord('e')">Add Word</button>
+            class="input input-primary input-bordered w-full max-w-xs join-item" />
+        <button class="btn btn-primary btn-outline join-item" wire:click="addWord('e')">Add Word</button>
     </div>
     <div class="word-container mb-8">
         @foreach ($word_array as &$word)
-            <span 
-                class="word text-lg block {{ $word == $active_word ? 'text-red-400' : '' }} cursor-pointer"
-                wire:click="modifyActiveWord('{{ $word }}')">{{ $word }}
-            </span>
+            <div>
+                <button class="btn btn-outline" wire:click="deleteWord('{{ $word }}')">X</button>
+                <button class="btn" wire:click="modifyActiveWord('{{ $word }}')">
+                    <span 
+                        class="word text-lg {{ $word == $active_word ? 'text-primary' : '' }} cursor-pointer">
+                        {{ $word }}
+                    </span>
+                </button>
+            </div>
         @endforeach
     </div>
 

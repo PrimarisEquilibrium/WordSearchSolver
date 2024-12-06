@@ -20,8 +20,9 @@ class Process extends Component
 
     public function mount(string $imagename, string $words) {
         // Decode the words array
-        $wordArray = json_decode($words);
-        $this->word_array = $wordArray;
+        $word_array = json_decode($words);
+        $word_array = array_map("strtolower", $word_array);
+        $this->word_array = $word_array;
         
         // Get the full image path
         $image_path = storage_path("app\\public\\images\\" . $imagename);
@@ -64,9 +65,25 @@ class Process extends Component
 
     /**
      * Adds the typed word to the words to find array.
+     * @note The word is only added if it's unique.
      */
     public function addWord() : void {
-        array_push($this->word_array, $this->input_word);
+        $this->input_word = strtolower($this->input_word);
+        if ($this->input_word && !in_array($this->input_word, $this->word_array)) {
+            array_push($this->word_array, $this->input_word);
+        }
+        $this->input_word = "";
+    }
+
+    /**
+     * Deletes the given word from the "words to find" array.
+     * @param string $word The word to delete.
+     */
+    public function deleteWord(string $word) : void {
+        $key = array_search($word, $this->word_array);
+        if ($key !== false) {
+            unset($this->word_array[$key]);
+        }
     }
  
     public function render() {
