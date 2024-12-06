@@ -1,5 +1,6 @@
 <div class="prose">
     <h1>Find Words</h1>
+    
     <div class="mb-4">
         @if (!$edit_mode)
             <div class="row-container font-mono	block">
@@ -31,7 +32,6 @@
     </button>
 
     <h2>Words (Click to reveal): </h2>
-
     <div class="join mb-4">
         <input
             type="text"
@@ -40,7 +40,6 @@
             class="input input-bordered input-primary w-full max-w-xs join-item" />
         <button class="btn btn-outline btn-primary join-item" wire:click="addWord('e')">Add Word</button>
     </div>
-
     <div class="word-container mb-8">
         @foreach ($word_array as &$word)
             <span 
@@ -49,5 +48,6 @@
             </span>
         @endforeach
     </div>
+
     <button class="btn btn-neutral btn-wide" onclick="window.location.href='{{ route('home') }}'">Return Home</button>
 </div>

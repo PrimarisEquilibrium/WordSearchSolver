@@ -1,5 +1,5 @@
 <div>
-    @if ($image)
+    @if ($image && !$errors->any())
         <img 
             class="w-64 h-64 border border-gray-400 object-cover rounded-md" 
             src="{{ $image->temporaryUrl() }}" 
@@ -17,6 +17,7 @@
             Click to upload image
         </label>
     @endif
+
     <input 
         type="file" 
         wire:model="image" 

@@ -11,9 +11,20 @@ class ImageInput extends Component
 
     public $image;
 
-    protected $rules = [
-        "image" => "required|image|mimes:jpg,png,jpeg|max:2048"
-    ];
+    protected function rules() {
+        return [
+            "image" => "required|image|mimes:jpg,png,jpeg|max:2048",
+        ];
+    }
+
+    /**
+     * Validate when the $image is updated.
+     * @note This prevents a file preview error when invalid file types are provided.
+     */
+    public function updated()
+    {
+        $this->validate();
+    }
 
     /**
      * Resets the image state data

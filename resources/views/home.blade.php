@@ -3,6 +3,14 @@
 @section("content")
 
 <div class="prose w-max h-max">
+    <div class="mb-8 fixed">
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                @livewire('error-alert', ['error' => $error])
+            @endforeach
+        @endif
+    </div>
+
     <div class="mb-8">
         <h1>Word Search Solver</h1>
         <ul class="-mt-4">
@@ -27,8 +35,7 @@
             class="mb-2 textarea textarea-bordered textarea-md w-full max-w-xs"
             name="words"
             id="words"
-            rows="5"
-            required></textarea>
+            rows="5"></textarea>
         <button type="submit" id="submit-btn" class="btn btn-neutral btn-wide">Submit</button>
     </form>
 </div>
