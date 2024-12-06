@@ -2,8 +2,11 @@
 
 namespace App\Livewire;
 
+use App\Rules\ValidWordSearchBoard;
 use App\Services\OcrReaderService;
 use App\Services\WordSearchSolverService;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 use Livewire\Component;
 
 class Process extends Component
@@ -32,7 +35,7 @@ class Process extends Component
         $rows = preg_split('/\s+/', $raw_rows);
         $this->rows = $rows;
 
-        $this->input_rows = implode(", \n", $this->rows);
+        $this->input_rows = implode("\n", $this->rows);
     }  
 
     /**
@@ -47,12 +50,28 @@ class Process extends Component
     }
 
     /**
-     * Replaces $rows with $input_rows.
+     * Replaces $rows with $input_rows. Displays errors if the input box is invalid.
      */
-    public function updateBoard() : void {
-        // $input_rows is in a string format, convert it into an array of string rows
-        $this->rows = preg_split('/\s+/', $this->input_rows);
-        $this->toggleEditMode();
+    public $validation_rows;
+    public function updatedInputRows()
+    {
+        // $validation_rows handles validation logic for the user input rows
+        $this->validation_rows = preg_split('/\s+/', $this->input_rows);
+        
+        // Validate $input_rows ($validation_rows) using a custom rule
+        $validator = Validator::make(['validation_rows' => $this->validation_rows], [
+            'validation_rows' => [new ValidWordSearchBoard]
+        ]);
+
+        if ($validator->fails()) {
+            // Revert changes and throw exception for template
+            $this->input_rows = implode("\n", $this->rows);
+            throw new ValidationException($validator);
+        } else {
+            // Make changes successfully
+            $this->input_rows = implode("\n", $this->validation_rows);
+            $this->rows = $this->validation_rows;
+        }
     }
 
     /**

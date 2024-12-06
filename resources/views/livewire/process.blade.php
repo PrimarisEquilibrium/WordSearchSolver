@@ -1,4 +1,12 @@
 <div class="prose">
+    <div class="mb-8 fixed">
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                @livewire('error-alert', ['error' => $error])
+            @endforeach
+        @endif
+    </div>
+
     <h1>Find Words</h1>
     
     <div class="mb-4">
@@ -20,9 +28,10 @@
                 cols="{{ strlen($rows[0]) * 1.5 }}" 
                 rows="{{ count($rows) }}"
                 wire:model="input_rows"
-            >{{ implode(", \n", $rows) }}</textarea>
+            >{{ implode("\n", $rows) }}</textarea>
         @endif
     </div>
+
     <button class="btn btn-outline btn-primary" wire:click="toggleEditMode">
         @if (!$edit_mode)
             Modify Board
@@ -37,16 +46,16 @@
             type="text"
             placeholder="Word to add..."
             wire:model="input_word"
-            class="input input-primary input-bordered w-full max-w-xs join-item" />
-        <button class="btn btn-primary btn-outline join-item" wire:click="addWord('e')">Add Word</button>
+            class="input input-bordered w-full max-w-xs join-item" />
+        <button class="btn btn-outline join-item" wire:click="addWord('e')">Add Word</button>
     </div>
     <div class="word-container mb-8">
         @foreach ($word_array as &$word)
             <div>
                 <button class="btn btn-outline" wire:click="deleteWord('{{ $word }}')">X</button>
-                <button class="btn" wire:click="modifyActiveWord('{{ $word }}')">
+                <button class="btn {{ $word == $active_word ? 'btn-neutral' : '' }}" wire:click="modifyActiveWord('{{ $word }}')">
                     <span 
-                        class="word text-lg {{ $word == $active_word ? 'text-primary' : '' }} cursor-pointer">
+                        class="word text-lg cursor-pointer">
                         {{ $word }}
                     </span>
                 </button>
