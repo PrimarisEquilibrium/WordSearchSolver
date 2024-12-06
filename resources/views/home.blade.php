@@ -19,6 +19,7 @@
         <textarea name="words" id="words" cols="30" rows="10" required></textarea>
         <button type="submit" id="submit-btn">Submit</button>
     </form>
+    <button class="btn w-64 rounded-full">Button</button>
 </div>
 
 @endsection
