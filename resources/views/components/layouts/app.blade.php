@@ -3,3 +3,5 @@
 @section("content")
 
 {{ $slot }}
+
+@endsection
