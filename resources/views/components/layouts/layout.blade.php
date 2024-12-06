@@ -7,7 +7,7 @@
     <title>Word Search Solver</title>
 </head>
 <body>
-    <div class="container">
+    <div class="app-container">
         @yield('content')
     </div>
 </body>

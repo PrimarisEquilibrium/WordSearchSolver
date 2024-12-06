@@ -1,47 +1,27 @@
 <div>
-    <style>
-        .preview-img {
-            width: 250px;
-            height: 250px;
-            border: 1px solid black
-        }
-
-        .preview-placeholder {
-            display: flex;
-            width: 250px; 
-            height: 250px;
-            background-color:rgb(229, 229, 229);
-            border: 1px solid black;
-            text-align: center;
-            vertical-align: middle;
-            line-height: 250px;
-            user-select: none;
-            cursor: pointer;
-        }
-
-        .preview-placeholder-label {
-            flex: 1;
-            cursor: pointer;
-            color: gray;
-            font-size: 1.25rem;
-        }
-
-        input[type="file"] {
-            visibility: hidden;
-            position: absolute;
-            top: -500px;
-        }
-    </style>
-
     @if ($image)
-        <img class="preview-img" src="{{ $image->temporaryUrl() }}" alt="image preview">
-        <button type="button" wire:click="resetImage()">Reset Image</button>
+        <img 
+            class="w-64 h-64 border border-gray-400 object-cover rounded-md" 
+            src="{{ $image->temporaryUrl() }}" 
+            alt="image preview">
+        <button 
+            type="button" 
+            wire:click="resetImage()" 
+            class="btn btn-neutral btn-error btn-sm">
+            Reset Image
+        </button>
     @else
-        <div class="preview-placeholder">
-            <label class="preview-placeholder-label" for="image">
-                Click to upload image
-            </label>
-        </div>
-        @endif
-    <input type="file" wire:model="image" name="image" id="image" required>
+        <label 
+            for="image" 
+            class="flex items-center justify-center w-64 h-64 bg-base-200 border border-gray-400 text-gray-400 text-lg cursor-pointer rounded-md transition ease-in-out hover:bg-base-300">
+            Click to upload image
+        </label>
+    @endif
+    <input 
+        type="file" 
+        wire:model="image" 
+        name="image" 
+        id="image" 
+        class="hidden" 
+        required>
 </div>
