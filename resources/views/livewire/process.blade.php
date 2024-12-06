@@ -34,8 +34,7 @@
     <div class="word-container mb-8">
         @foreach ($word_array as &$word)
             <span 
-                class="word text-lg"
-                style="{{ $word == $active_word ? 'color: gray;' : '' }}"
+                class="word text-lg block {{ $word == $active_word ? 'text-red-400' : '' }} cursor-pointer"
                 wire:click="modifyActiveWord('{{ $word }}')">{{ $word }}
             </span>
         @endforeach
